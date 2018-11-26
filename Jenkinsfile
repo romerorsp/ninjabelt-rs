@@ -84,7 +84,7 @@ pipeline {
         }
       }
 
-      stage('Promote to Environments') {
+      stage('Promote to Develop') {
         when {
           branch 'develop'
         }

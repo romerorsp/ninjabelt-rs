@@ -1,4 +1,4 @@
-package br.com.cinq.dojo.ninjabeltrs;
+package br.com.cinq.dojo.ninjabelt.rs;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -35,7 +35,7 @@ pipeline {
           }
         }
       }
-      stage('Build Release') {
+      stage('Build Candidate Release') {
         when {
           branch 'master'
         }
@@ -65,6 +65,38 @@ pipeline {
           }
         }
       }
+
+      stage('Build DEV Release') {
+        when {
+          branch 'develop'
+        }
+        steps {
+          container('maven') {
+            // ensure we're not on a detached head
+            sh "git checkout develop"
+            sh "git config --global credential.helper store"
+
+            sh "jx step git credentials"
+            // so we can retrieve the version in later steps
+            sh "echo \$(jx-release-version)-dev > VERSION"
+            sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
+          }
+          dir ('./charts/ninjabelt-rs') {
+            container('maven') {
+              sh "make tag"
+            }
+          }
+          container('maven') {
+            sh 'mvn clean deploy'
+
+            sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
+
+
+            sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
+          }
+        }
+      }
+
       stage('Promote to Environments') {
         when {
           branch 'master'
@@ -79,6 +111,25 @@ pipeline {
 
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+            }
+          }
+        }
+      }
+
+      stage('Promote to Develop') {
+        when {
+          branch 'develop'
+        }
+        steps {
+          dir ('./charts/ninjabelt-rs') {
+            container('maven') {
+              sh 'jx step changelog --version v\$(cat ../../VERSION)'
+
+              // release the helm chart
+              sh 'jx step helm release'
+
+              // promote through all 'Auto' promotion Environments
+              sh 'jx promote -b --env=develop --timeout 1h --version \$(cat ../../VERSION)'
             }
           }
         }

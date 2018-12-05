@@ -40,4 +40,10 @@ spec:
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          valueFrom:
+            configMapKeyRef:
+              name: ninjabelt-rs-configuration
+              key: spring.pro
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}

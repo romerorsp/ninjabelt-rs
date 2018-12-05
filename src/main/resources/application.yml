@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /ninjabelt-rs
+
+ninja:
+  environment:
+    value: default

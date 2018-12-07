@@ -19,6 +19,13 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
+        env:
+          - name: {{ .Values.env.name }}
+            valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.env.valueFrom.configMapKeyRef.name }}
+                  key: {{ .Values.env.valueFrom.configMapKeyRef.key }}
+
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
@@ -40,10 +47,4 @@ spec:
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
-        env:
-        - name: SPRING_PROFILES_ACTIVE
-          valueFrom:
-            configMapKeyRef:
-              name: ninjabelt-rs-configuration
-              key: spring.pro
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}

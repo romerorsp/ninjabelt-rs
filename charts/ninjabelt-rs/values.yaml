@@ -21,7 +21,7 @@ resources:
   requests:
     cpu: 400m
     memory: 512Mi
-probePath: /actuator/health
+probePath: /ninjabelt-rs/actuator/health
 livenessProbe:
   initialDelaySeconds: 60
   periodSeconds: 10
@@ -32,3 +32,9 @@ readinessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
+env:
+  name: SPRING_PROFILES_ACTIVE
+  valueFrom:
+    configMapKeyRef:
+      name: ninjabelt-rs-configuration
+      key: spring.profiles.active

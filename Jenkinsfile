@@ -10,7 +10,7 @@ pipeline {
     stages {
       stage('CI Build and push snapshot') {
         when {
-          branch 'PR-*'
+          branch 'PR-*|feature*'
         }
         environment {
           PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
@@ -78,7 +78,7 @@ pipeline {
 
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
-            sh "echo \$(jx-release-version)-dev > VERSION"
+            sh "echo \$(jx-release-version) > VERSION"
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
           }
           dir ('./charts/ninjabelt-rs') {

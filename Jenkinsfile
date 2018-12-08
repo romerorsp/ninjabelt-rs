@@ -3,7 +3,7 @@ pipeline {
       label "jenkins-maven"
     }
     environment {
-      ORG               = 'romerorsp'
+      ORG               = 'cinqtechnologies'
       APP_NAME          = 'ninjabelt-rs'
       CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     }
@@ -66,7 +66,7 @@ pipeline {
         }
       }
 
-      stage('Build DEV Release') {
+      stage('Build Develop Release') {
         when {
           branch 'develop'
         }
@@ -97,7 +97,7 @@ pipeline {
         }
       }
 
-      stage('Promote to Environments') {
+      stage('Promote to Automatic Environments (Staging and Develop, Production must be manual)') {
         when {
           branch 'master'
         }
@@ -110,13 +110,13 @@ pipeline {
               sh 'jx step helm release'
 
               // promote through all 'Auto' promotion Environments
-              sh 'jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+              sh 'jx promote -b --all-auto --timeout 2h --version \$(cat ../../VERSION)'
             }
           }
         }
       }
 
-      stage('Promote to Develop') {
+      stage('Promote to Develop Environment') {
         when {
           branch 'develop'
         }

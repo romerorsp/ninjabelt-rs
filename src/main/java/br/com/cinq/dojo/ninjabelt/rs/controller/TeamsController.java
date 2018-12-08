@@ -6,6 +6,7 @@ import br.com.cinq.dojo.ninjabelt.rs.response.ListOfTeams;
 import br.com.cinq.dojo.ninjabelt.rs.response.Ninja;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,10 @@ public class TeamsController {
     this.environmentProperties = environmentProperties;
   }
 
-  @RequestMapping("/list")
+  @RequestMapping(
+      value = "/list",
+      produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+  )
   public ResponseEntity<ListOfTeams> getEnvironment() {
     return ResponseEntity.ok(mockListOfTeams());
   }
@@ -33,6 +37,7 @@ public class TeamsController {
     final Team presenters = new Team();
     presenters.setIsPresenter(true);
     presenters.setName("Presenters");
+    presenters.setId("1");
     final List<Ninja> ninjas = new ArrayList<>();
     final Ninja ninjaRomero = new Ninja();
     ninjaRomero.setName("Rômero Ricardo");

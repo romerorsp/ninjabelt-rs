@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Team {
 
+  private String id;
+
   private Boolean isPresenter;
 
   private String name;
@@ -33,5 +35,13 @@ public class Team {
 
   public void setNinjas(List<Ninja> ninjas) {
     this.ninjas = ninjas;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 }

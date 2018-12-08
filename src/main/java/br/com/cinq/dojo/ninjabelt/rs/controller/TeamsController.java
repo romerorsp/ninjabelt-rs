@@ -38,6 +38,10 @@ public class TeamsController {
     ninjaRomero.setName("Rômero Ricardo");
     final Ninja ninjaGabriel = new Ninja();
     ninjaGabriel.setName("Gabriel Santos");
+
+    ninjas.add(ninjaRomero);
+    ninjas.add(ninjaGabriel);
+
     presenters.setNinjas(ninjas);
     teams.add(presenters);
     list.setTeams(teams);

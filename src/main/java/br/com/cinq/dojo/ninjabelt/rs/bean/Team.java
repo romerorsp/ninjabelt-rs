@@ -16,7 +16,7 @@ public class Team {
   }
 
   public void setIsPresenter(Boolean isPresenter) {
-    isPresenter = isPresenter;
+    this.isPresenter = isPresenter;
   }
 
   public String getName() {

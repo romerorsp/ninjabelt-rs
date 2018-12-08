@@ -27,7 +27,7 @@ public class TeamsController {
       value = "/list",
       produces = MediaType.APPLICATION_JSON_UTF8_VALUE
   )
-  public ResponseEntity<ListOfTeams> getEnvironment() {
+  public ResponseEntity<ListOfTeams> getTeams() {
     return ResponseEntity.ok(mockListOfTeams());
   }
 

@@ -25,6 +25,7 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.env.valueFrom.configMapKeyRef.name }}
                   key: {{ .Values.env.valueFrom.configMapKeyRef.key }}
+                  optional: true
 
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}

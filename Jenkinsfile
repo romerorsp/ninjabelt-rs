@@ -40,7 +40,7 @@ pipeline {
           branch 'feature/*'
         }
         environment {
-          NORMALIZED_BRANCH_NAME = $(echo $BRANCH_NAME | tr '/' _ | tr '\' _)
+          NORMALIZED_BRANCH_NAME = "$(echo $BRANCH_NAME | tr '/' _ | tr '\' _)"
           PREVIEW_VERSION = "0.0.0-SNAPSHOT-$NORMALIZED_BRANCH_NAME-$BUILD_NUMBER"
           PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
           PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()

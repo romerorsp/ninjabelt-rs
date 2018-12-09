@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,10 +21,12 @@ public class TeamService {
 
   @PostConstruct
   public void loadPresenters() {
-    template.save
+    if (!template.exists(Query.query(Criteria.where("isPresenter").is(true)), Team.class)) {
+      template.save(buildInitialTeam());
+    }
   }
 
-  private Team mockListOfTeams() {
+  private Team buildInitialTeam() {
     final Team presenters = new Team();
     presenters.setIsPresenter(true);
     presenters.setName("Presenters");

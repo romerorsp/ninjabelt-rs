@@ -58,7 +58,7 @@ pipeline {
           dir ('./charts/preview') {
            container('maven') {
              sh "make preview"
-             sh "jx preview --app $APP_NAME --dir ../.. --namespace $PREVIEW_NAMESPACE"
+             sh "jx preview --app $APP_NAME --dir ../.. --namespace $PREVIEW_NAMESPACE --pr $BUILD_NUMBER"
            }
           }
         }

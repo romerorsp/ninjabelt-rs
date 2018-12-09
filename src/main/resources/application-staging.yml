@@ -1,3 +1,8 @@
 ninja:
   environment:
     value: staging
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://staginguser:jxdojostg@mongodb-staging:27017/teams-stg

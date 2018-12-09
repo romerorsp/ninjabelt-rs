@@ -1,3 +1,8 @@
 ninja:
   environment:
     value: develop
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://developuser:jxdojodev@35.194.189.56:27017/teams-dev

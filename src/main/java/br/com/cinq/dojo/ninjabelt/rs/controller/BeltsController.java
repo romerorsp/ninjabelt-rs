@@ -1,11 +1,8 @@
 package br.com.cinq.dojo.ninjabelt.rs.controller;
 
-import br.com.cinq.dojo.ninjabelt.rs.bean.Team;
 import br.com.cinq.dojo.ninjabelt.rs.properties.EnvironmentProperties;
 import br.com.cinq.dojo.ninjabelt.rs.response.Belt;
 import br.com.cinq.dojo.ninjabelt.rs.response.ListOfBelts;
-import br.com.cinq.dojo.ninjabelt.rs.response.ListOfTeams;
-import br.com.cinq.dojo.ninjabelt.rs.response.Ninja;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

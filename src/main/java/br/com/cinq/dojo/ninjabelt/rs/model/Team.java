@@ -1,10 +1,13 @@
-package br.com.cinq.dojo.ninjabelt.rs.bean;
+package br.com.cinq.dojo.ninjabelt.rs.model;
 
-import br.com.cinq.dojo.ninjabelt.rs.response.Ninja;
 import java.util.List;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "team")
 public class Team {
 
+  @Id
   private String id;
 
   private Boolean isPresenter;

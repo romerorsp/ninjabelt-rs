@@ -1,6 +1,5 @@
 package br.com.cinq.dojo.ninjabelt.rs.response;
 
-import br.com.cinq.dojo.ninjabelt.rs.bean.Team;
 import java.util.List;
 
 public class ListOfTeams {

@@ -40,8 +40,9 @@ pipeline {
           branch 'feature/*'
         }
         environment {
+          NORMALIZED_BRANCH_NAME = "$BRANCH_NAME".replaceAll('/', '-').replaceAll('\\\\', '-')
           PREVIEW_VERSION = "0.0.0-FEATURE-$BUILD_NUMBER"
-          PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
+          PREVIEW_NAMESPACE = "$APP_NAME-$NORMALIZED_BRANCH_NAME".toLowerCase()
           HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
         }
         steps {
@@ -57,7 +58,7 @@ pipeline {
           dir ('./charts/preview') {
            container('maven') {
              sh "make preview"
-             sh "jx preview --app $APP_NAME --dir ../.."
+             sh "jx preview --app $APP_NAME --dir ../.. --namespace $PREVIEW_NAMESPACE"
            }
           }
         }

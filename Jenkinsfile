@@ -40,8 +40,7 @@ pipeline {
           branch 'feature/*'
         }
         environment {
-          NORMALIZED_BRANCH_NAME = "$BRANCH_NAME".replaceAll('/', '-').replaceAll('\\\\', '-')
-          PREVIEW_VERSION = "0.0.0-SNAPSHOT-$NORMALIZED_BRANCH_NAME-$BUILD_NUMBER"
+          PREVIEW_VERSION = "0.0.0-FEATURE-$BUILD_NUMBER"
           PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
           HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
         }
